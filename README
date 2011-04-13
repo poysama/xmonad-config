@@ -1,0 +1,6 @@
+A simple xmonad config to work with GNOME.
+
+This assumes you have kupfer as your launcher but also works with gnome-do. =)
+supports fullscreen too. With the java workaround for gray screen error
+
+=)
