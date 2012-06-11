@@ -12,26 +12,28 @@ import XMonad.Layout.NoBorders
 
 myManageHook :: [ManageHook]
 myManageHook =
-	[ resource  =? "Do" --> doIgnore,
-  , isFullscreen --> doFullFloat ]
+  [ resource  =? "Do" --> doIgnore
+    ,isFullscreen --> doFullFloat
+    , className =? "Unity-2d-panel" --> doIgnore ]
+--    , className =? "Unity-2d-shell" --> doFloat ]
 
 main = xmonad $ gnomeConfig
-	{ modMask = mod4Mask
+  { modMask = mod4Mask
         , terminal = "urxvt"
         , borderWidth = 2
-       	, manageHook = manageHook gnomeConfig <+> composeAll myManageHook
-	      , logHook = ewmhDesktopsLogHook >> setWMName "LG3D" -- java workaround
+        , manageHook = manageHook gnomeConfig <+> composeAll myManageHook
+        , logHook = ewmhDesktopsLogHook >> setWMName "LG3D" -- java workaround
         , layoutHook = smartBorders $ layoutHook gnomeConfig
-	}
-	`additionalKeysP`
-		[ ("M-S-q", spawn "gnome-session-save --gui --logout-dialog") -- display logout-dialog
-		-- Lock Screen
-		, ("M-S-l", spawn "gnome-screensaver-command -l")
-		, ("M-p", spawn "kupfer")
-		, ("M-<Space>", spawn "kupfer")
-		, ("<XF86Forward>", nextWS)
-		, ("<XF86Back>", prevWS)
-		, ("M1-<Tab>", windows W.focusDown)
-		, ("M-<R>", nextScreen)
-		, ("M-<L>", prevScreen)
-		]
+  }
+  `additionalKeysP`
+    [ ("M-S-q", spawn "gnome-session-save --gui --logout-dialog") -- display logout-dialog
+    -- Lock Screen
+    , ("M-S-l", spawn "gnome-screensaver-command -l")
+    , ("M-p", spawn "kupfer")
+    , ("M-<Space>", spawn "kupfer")
+    , ("<XF86Forward>", nextWS)
+    , ("<XF86Back>", prevWS)
+    , ("M1-<Tab>", windows W.focusDown)
+    , ("M-<R>", nextScreen)
+    , ("M-<L>", prevScreen)
+    ]
